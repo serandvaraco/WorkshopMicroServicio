@@ -1,0 +1,36 @@
+﻿@page
+@model AboutModel
+@{
+    ViewData["Title"] = "Shopping Cart";
+}
+<h2>@ViewData["Title"]</h2>
+
+<p>list of products shopping cart</p>
+
+<table class="table table-hover table-bordered table-responsive">
+    <thead class="thead-dark">
+        <tr>
+            <th>Id</th>
+            <th>Product name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (ProductModel product in (ProductModel[])ViewData["products"])
+        {
+            <tr>
+                <td>@product.Id</td>
+                <td>@product.Name</td>
+                <td>@product.Price</td>
+                <td><input type="number" min="1" max="10" value="" /></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="row">
+    <button type="button" class="btn btn-default">Procesar Pedido</button>
+    <button type="button" class="btn btn-warning">Cancelar Pedido</button>
+
+</div>

@@ -1,0 +1,28 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Products";
+}
+
+<div class="row">
+    <h2>List of Products</h2>
+    <br />
+    <div class="card-group" style="display:flex">
+        @foreach (ProductModel product in (ProductModel[])ViewData["products"])
+        {
+            <div class="card" style="margin: 5px">
+                <img class="card-img-top" style="text-align:center" height="100" width="180" src="~/images/item-cart-01.jpg">
+                <div class="card-body">
+                    <h5 class="card-title">@product.Name</h5>
+                    <p class="card-text">@product.Description</p>
+                    <p class="card-text"><span class="small text-muted"> Price $ @product.Price</span></p>
+                    <button class="btn btn-sm"> Add to cart </button>
+                </div>
+            </div>
+        }
+    </div>
+
+</div>
+
+
+
