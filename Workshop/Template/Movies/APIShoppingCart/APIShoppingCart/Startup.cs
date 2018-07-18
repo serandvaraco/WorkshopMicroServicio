@@ -5,6 +5,8 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Cors.Internal;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -27,10 +29,24 @@ namespace APIShoppingCart
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("ALL",
+                    builder => builder.AllowAnyOrigin()
+                                .AllowAnyMethod()
+                                .AllowAnyHeader());
+            });
+
             services.AddMvc();
             services.AddDbContext<Models.ShoppingCartDataContext>(o =>
             {
                 o.UseSqlServer(@"Data source=(localdb)\.;Initial Catalog=ShoppingDB;Integrated Security=true;");
+            });
+
+            services.Configure<MvcOptions>(options =>
+            {
+                options.Filters.Add(new CorsAuthorizationFilterFactory("ALL"));
             });
         }
 
@@ -48,6 +64,7 @@ namespace APIShoppingCart
                     PropertyNameHandling.CamelCase;
             });
 
+            app.UseCors("ALL");
             app.UseMvc();
         }
     }

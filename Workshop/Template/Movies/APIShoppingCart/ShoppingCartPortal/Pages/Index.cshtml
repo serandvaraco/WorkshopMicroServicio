@@ -3,6 +3,41 @@
 @{
     ViewData["Title"] = "Products";
 }
+@section Scripts{
+    <script type="text/javascript">
+        /**
+         * Add shopping Cart handler
+         */
+        function AddShoppingCart(product) {
+            var btnShoppingCart = $(product);
+            //send ajax data
+
+            var obj = {
+                "Id": 0,
+                "productId": btnShoppingCart.attr('data-productId'),
+                "productName": btnShoppingCart.attr('data-productName'),
+                "quantity": 1,
+                "total": btnShoppingCart.attr('data-productPrice'),
+                "price": btnShoppingCart.attr('data-productPrice')
+            };
+            $.post('url', {}, function (x) { alert(x); }, "json")
+
+
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:50140/api/ShoppingCart",
+                data: JSON.stringify(obj),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) { alert(data); },
+                failure: function (errMsg) {
+                    alert(errMsg);
+                }
+            });
+
+        }
+    </script>
+}
 
 <div class="row">
     <h2>List of Products</h2>
@@ -16,13 +51,19 @@
                     <h5 class="card-title">@product.Name</h5>
                     <p class="card-text">@product.Description</p>
                     <p class="card-text"><span class="small text-muted"> Price $ @product.Price</span></p>
-                    <button class="btn btn-sm"> Add to cart </button>
+                    <button data-productName="@product.Name"
+                            data-productPrice="@product.Price"
+                            data-productId="@product.Id"
+                            onclick="AddShoppingCart(this)"
+                            class="btn btn-sm">
+                        Add to cart
+                    </button>
                 </div>
             </div>
         }
     </div>
-
 </div>
+
 
 
 
