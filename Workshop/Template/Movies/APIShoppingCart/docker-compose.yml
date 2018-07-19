@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  shoppingcartportal:
+    image: shoppingcartportal
+    build:
+      context: .
+      dockerfile: ShoppingCartPortal/Dockerfile
+
+  apishoppingcart:
+    image: apishoppingcart
+    build:
+      context: .
+      dockerfile: APIShoppingCart/Dockerfile
+

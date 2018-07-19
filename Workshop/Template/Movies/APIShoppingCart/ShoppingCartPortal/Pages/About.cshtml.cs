@@ -18,15 +18,22 @@ namespace ShoppingCartPortal.Pages
 
         public async Task<IEnumerable<ProductModel>> GetShoppingCartAsync()
         {
-            using (HttpClient client = new HttpClient())
+            try
             {
-                client.BaseAddress = new Uri("http://localhost:50140/api/");
-                var response = await client.GetAsync("ShoppingCart");
-                if (!response.IsSuccessStatusCode)
-                    return Enumerable.Empty<ProductModel>();
+                using (HttpClient client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri("http://localhost:32769/api/");
+                    var response = await client.GetAsync("ShoppingCart");
+                    if (!response.IsSuccessStatusCode)
+                        return Enumerable.Empty<ProductModel>();
 
-                return JsonConvert.DeserializeObject<ProductModel[]>(
-                    await response.Content.ReadAsStringAsync());
+                    return JsonConvert.DeserializeObject<ProductModel[]>(
+                        await response.Content.ReadAsStringAsync());
+                }
+            }
+            catch (Exception ex)
+            {
+                return Enumerable.Empty<ProductModel>();
             }
         }
 

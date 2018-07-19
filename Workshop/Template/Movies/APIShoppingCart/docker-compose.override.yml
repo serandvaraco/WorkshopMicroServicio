@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  shoppingcartportal:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "80"
+
+  apishoppingcart:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "80"
+

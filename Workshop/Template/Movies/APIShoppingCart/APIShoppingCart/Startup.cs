@@ -41,7 +41,7 @@ namespace APIShoppingCart
             services.AddMvc();
             services.AddDbContext<Models.ShoppingCartDataContext>(o =>
             {
-                o.UseSqlServer(@"Data source=(localdb)\.;Initial Catalog=ShoppingDB;Integrated Security=true;");
+                o.UseSqlServer(@"Data source=dockerworkshop.database.windows.net;Initial Catalog=ShoppingCartDB;User Id=serandvaraco;password=Abc123..");
             });
 
             services.Configure<MvcOptions>(options =>
