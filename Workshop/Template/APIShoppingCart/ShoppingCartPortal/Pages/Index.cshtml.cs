@@ -26,7 +26,7 @@ namespace ShoppingCartPortal.Pages
             {
                 using (HttpClient http = new HttpClient())
                 {
-                    http.BaseAddress = new Uri("http://localhost:32769/api/");
+                    http.BaseAddress = new Uri("http://apishoppingcart/api/");
 
                     var response = await http.GetAsync("products");
                     if (!response.IsSuccessStatusCode)

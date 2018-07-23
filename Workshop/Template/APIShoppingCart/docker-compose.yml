@@ -1,4 +1,8 @@
-version: '3'
+version: '3.4'
+
+networks:
+  isolation-network:
+    driver: bridge
 
 services:
   shoppingcartportal:
@@ -6,10 +10,16 @@ services:
     build:
       context: .
       dockerfile: ShoppingCartPortal/Dockerfile
-
+    ports:
+      - "5000:8080"
+    networks:
+      - isolation-network
   apishoppingcart:
     image: apishoppingcart
     build:
       context: .
       dockerfile: APIShoppingCart/Dockerfile
-
+    ports:
+      - "5001:80"
+    networks:
+      - isolation-network

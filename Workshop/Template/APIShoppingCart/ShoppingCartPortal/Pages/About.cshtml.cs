@@ -22,7 +22,7 @@ namespace ShoppingCartPortal.Pages
             {
                 using (HttpClient client = new HttpClient())
                 {
-                    client.BaseAddress = new Uri("http://localhost:32769/api/");
+                    client.BaseAddress = new Uri("http://apishoppingcart/api/");
                     var response = await client.GetAsync("ShoppingCart");
                     if (!response.IsSuccessStatusCode)
                         return Enumerable.Empty<ProductModel>();

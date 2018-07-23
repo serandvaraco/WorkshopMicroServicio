@@ -64,6 +64,7 @@ namespace APIShoppingCart
                     PropertyNameHandling.CamelCase;
             });
 
+            
             app.UseCors("ALL");
             app.UseMvc();
         }
